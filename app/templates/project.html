@@ -2,6 +2,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+  <title>{{ title }}</title>
   <h3>Your pending tasks</h3>
   {% for task in tasks %}
   <form method="post" name="completetask">
@@ -11,10 +13,5 @@
   {% endfor %}
 
   <a href="{{ url_for('add_task') }}">Add a new task</a>
-
-  <h3>Your projects</h3>
-  {% for project in projects %}
-  <a  href="{{ url_for('project', project_name=project) }}">{{ project }}</a><br>
-  {% endfor %}
 
 {% endblock %}

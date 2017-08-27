@@ -30,6 +30,9 @@ class User(db.Model):
     def get_completed_tasks(self):
         return Task.query.filter_by(user_id=self.id, complete=True).order_by(desc('start_date')).all()
 
+    def get_projects(self):
+        return Task.query.with_entities(Task.project.distinct()).filter_by(user_id=self.id).filter(Task.project != None).order_by('project').all()
+
     def __repr__(self):
         return '<User {}>'.format(self.nickname)
 

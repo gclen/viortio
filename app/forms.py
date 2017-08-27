@@ -14,6 +14,7 @@ class TaskForm(FlaskForm):
     task = StringField('Task', [validators.DataRequired('Please enter the task')])
     due_date = DateField('Due date', [validators.Optional()])
     start_date = DateField('Start date', [validators.Optional()])
+    project = StringField('Project', [validators.Optional()])
 
 
 class RegistrationForm(FlaskForm):
