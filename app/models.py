@@ -1,4 +1,5 @@
 from datetime import datetime
+from sqlalchemy import desc
 from app import db
 
 
@@ -25,6 +26,9 @@ class User(db.Model):
 
     def get_tasklist(self):
         return Task.query.filter_by(user_id=self.id, complete=False).filter(Task.start_date <= datetime.utcnow()).order_by('start_date').all()
+
+    def get_completed_tasks(self):
+        return Task.query.filter_by(user_id=self.id, complete=True).order_by(desc('start_date')).all()
 
     def __repr__(self):
         return '<User {}>'.format(self.nickname)

@@ -23,6 +23,13 @@ def index():
 
     return render_template('index.html', tasks=tasks)
 
+@app.route('/completed', methods=['GET', 'POST'])
+@login_required
+def completed_tasks():
+
+    tasks = g.user.get_completed_tasks()
+    return render_template('completed_tasks.html', tasks=tasks)
+
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))

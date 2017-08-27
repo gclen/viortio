@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h3>Your tasks</h3>
+  <h3>Your pending tasks</h3>
   {% for task in tasks %}
   <form method="post" name="completetask">
   {{ task.name }} {% if task.due_date %} (due {{ task.due_date|datetimeformat }}) {% endif %}
