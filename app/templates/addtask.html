@@ -1,0 +1,33 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h3>Add a new task</h3>
+
+  <form action="" method="post" name="addtask">
+    {{ form.hidden_tag() }}
+
+    <div class="control-group">
+      <div class="controls">
+      Task name<br>
+      {{ form.task(size=140) }}<br>
+      {% for error in form.task.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+      Due date (optional)<br>
+      {{ form.due_date}}<br>
+      {% for error in form.due_date.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+      Date to start showing task (optional)<br>
+      {{ form.start_date}}<br>
+      {% for error in form.start_date.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+      <p><input type="submit" value="Add task"></p>
+      </div>
+    </div>
+
+  </form>
+{% endblock %}

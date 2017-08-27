@@ -13,16 +13,15 @@ from .models import User, Task
 @login_required
 def index():
 
-    tasks = g.user.get_tasklist()
-    form = TaskForm()
-    if form.validate_on_submit():
-        t = Task(name=form.task.data, due_date=form.due_date.data, user_id=g.user.id, start_date=datetime.utcnow())
+    if request.form.get('is_finished'):
+        t = Task.query.get(request.form.get('is_finished'))
+        t.complete = True
         db.session.add(t)
         db.session.commit()
-        flash(gettext('Task added!'))
-        return redirect(url_for('index'))
 
-    return render_template('index.html', tasks=tasks, form=form)
+    tasks = g.user.get_tasklist()
+
+    return render_template('index.html', tasks=tasks)
 
 @lm.user_loader
 def load_user(id):
@@ -70,4 +69,28 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html', form=form, title='Create an account')
+
+@app.route('/addtask', methods=['GET', 'POST'])
+@login_required
+def add_task():
+
+    form = TaskForm()
+    if form.validate_on_submit():
+        if form.start_date.data:
+            sd = form.start_date.data
+        else:
+            sd = datetime.utcnow()
+        t = Task(name=form.task.data, due_date=form.due_date.data, user_id=g.user.id, start_date=sd)
+        db.session.add(t)
+        db.session.commit()
+        flash(gettext('Task added!'))
+        return redirect(url_for('index'))
+
+
+    return render_template('addtask.html', form=form)
+
+
+
+
+
 

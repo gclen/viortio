@@ -1,6 +1,6 @@
 import re
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, PasswordField, BooleanField, validators, ValidationError
+from wtforms import StringField, DateField, PasswordField, BooleanField, validators, ValidationError, widgets, SelectMultipleField
 from .models import User
 
 

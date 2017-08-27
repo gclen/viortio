@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 
 
@@ -23,7 +24,7 @@ class User(db.Model):
         return str(self.id)
 
     def get_tasklist(self):
-        return Task.query.filter_by(user_id=self.id, status='Incomplete').order_by('start_date').all()
+        return Task.query.filter_by(user_id=self.id, complete=False).filter(Task.start_date <= datetime.utcnow()).order_by('start_date').all()
 
     def __repr__(self):
         return '<User {}>'.format(self.nickname)
@@ -36,7 +37,7 @@ class Task(db.Model):
     due_date = db.Column(db.DateTime, index=True)
     project = db.Column(db.String(140), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    status = db.Column(db.String(80), index=True, default='Incomplete')
+    complete = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return 'Task is: {}'.format(self.name)
