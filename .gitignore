@@ -1,2 +1,7 @@
 **/*.pyc
 *.idea
+*.pyo
+app.db
+flask
+*.mo
+**/__pycache__
