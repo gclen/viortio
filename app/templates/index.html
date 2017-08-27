@@ -4,20 +4,29 @@
 {% block content %}
   <h3>Your tasks</h3>
   {% for task in tasks %}
-  <li>{{ task.name }} {% if task.due_date %} (due {{ task.due_date }}) {% endif %}</li>
+  <li>{{ task.name }} {% if task.due_date %} (due {{ task.due_date|datetimeformat }}) {% endif %}</li>
   {% endfor %}
 
   <h3>Add a new task</h3>
+
   <form action="" method="post" name="addtask">
     {{ form.hidden_tag() }}
-    <p>
-      Please enter your task <br>
+
+    <div class="control-group">
+      <div class="controls">
+      Task name<br>
       {{ form.task(size=140) }}<br>
-    </p>
-    <p>
-      Enter the due date (optional)<br>
-      {{ form.due_date }} <br>
-    </p>
-    <p><input type="submit" value="Add task"></p>
+      {% for error in form.task.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+      Due date (optional)<br>
+      {{ form.due_date}}<br>
+      {% for error in form.due_date.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+      <p><input type="submit" value="Add task"></p>
+      </div>
+    </div>
+
   </form>
 {% endblock %}

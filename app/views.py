@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import render_template, flash, redirect, url_for, session, request, g
 from flask_login import login_required, logout_user, login_user, current_user
 from flask_babel import gettext
@@ -11,10 +12,13 @@ from .models import User, Task
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    tasks = []
+
+    tasks = g.user.get_tasklist()
     form = TaskForm()
     if form.validate_on_submit():
-        task = Task(name=form.task.data)
+        t = Task(name=form.task.data, due_date=form.due_date.data, user_id=g.user.id, start_date=datetime.utcnow())
+        db.session.add(t)
+        db.session.commit()
         flash(gettext('Task added!'))
         return redirect(url_for('index'))
 

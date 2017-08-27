@@ -1,4 +1,3 @@
-from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 
 
@@ -21,13 +20,14 @@ class User(db.Model):
         return False
 
     def get_id(self):
-        try:
-            return unicode(self.id)
-        except NameError:
-            return str(self.id)
+        return str(self.id)
+
+    def get_tasklist(self):
+        return Task.query.filter_by(user_id=self.id, status='Incomplete').order_by('start_date').all()
 
     def __repr__(self):
         return '<User {}>'.format(self.nickname)
+
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
