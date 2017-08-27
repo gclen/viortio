@@ -1,0 +1,12 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  Your tasks:
+  {% for task in tasks %}
+  <li>{{ task.name }} {% if task.due_date %} (due {{ task.due_date }}) {% endif %}</li>
+  {% endfor %}
+{% endblock %}
+
+
+

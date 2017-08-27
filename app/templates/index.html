@@ -1,0 +1,23 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block displaytasks %}
+  <h3>Your tasks</h3>
+  {% for task in tasks %}
+  <li>{{ task.name }} {% if task.due_date %} (due {{ task.due_date }}) {% endif %}</li>
+  {% endfor %}
+
+  <h3>Add a new task</h3>
+  <form action="" method="post" name="addtask">
+    {{ form.hidden_tag() }}
+    <p>
+      Please enter your task <br>
+      {{ form.task(size=140) }}<br>
+    </p>
+    <p>
+      Enter the due date (optional)<br>
+      {{ form.due_date }} <br>
+    </p>
+    <p><input type="submit" value="Add task"></p>
+  </form>
+{% endblock %}
