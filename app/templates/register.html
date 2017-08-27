@@ -1,0 +1,43 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <title>{{ title }}</title>
+
+  <div class="well">
+    <h3>{{ _('Create an account') }}</h3>
+  <form class="form" action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+
+    <div class="control-group">
+      <div class="controls">
+      Username: {{ form.username(size=80) }}<br>
+      {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}<br>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+      Password: {{ form.password(size=80) }}<br>
+      {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}<br>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+      Confirm password: {{ form.confirm(size=80) }}<br>
+      {% for error in form.confirm.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}<br>
+      </div>
+    </div
+    <div class="control-group">
+      <div class="controls">
+          <input class="btn btn-primary" type="submit" value="{{ _('Create account') }}">
+      </div>
+    </div>
+ </form>
+ </div>
+{% endblock %}

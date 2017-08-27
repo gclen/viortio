@@ -1,7 +1,7 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
-{% block displaytasks %}
+{% block content %}
   <h3>Your tasks</h3>
   {% for task in tasks %}
   <li>{{ task.name }} {% if task.due_date %} (due {{ task.due_date }}) {% endif %}</li>
