@@ -2,6 +2,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+  {% include 'flash.html' %}
+
   <h3>Your pending tasks</h3>
   {% for task in tasks %}
   <form method="post" name="completetask">

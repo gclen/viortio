@@ -21,7 +21,6 @@ def index():
         db.session.commit()
 
     tasks = g.user.get_tasklist()
-    #projects = g.user.get_projects()
     projects = [p[0] for p in g.user.get_projects()]
 
     return render_template('index.html', tasks=tasks, projects=projects)
@@ -54,11 +53,13 @@ def login():
     if form.validate_on_submit():
         session['rememberme'] = form.remember_me.data
         u = User.query.filter_by(nickname=form.username.data).first()
+
         if u is None:
             flash('Username or password is invalid')
             return redirect(url_for('login'))
         if check_password_hash(u.password_hash, form.password.data):
             login_user(u, remember=form.remember_me.data)
+            flash('Login successful')
             return redirect(url_for('index'))
         else:
             flash('Username or password is invalid')
@@ -70,6 +71,7 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
+    flash('You were logged out')
     return redirect(url_for('index'))
 
 
