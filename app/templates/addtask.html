@@ -11,7 +11,7 @@
     <div class="control-group">
       <div class="controls">
       Task name<br>
-      {{ form.task(size=140) }}<br>
+      {{ form.task(size=80) }}<br>
       {% for error in form.task.errors %}
         <span style="color: red;">[{{ error }}]</span>
       {% endfor %}
@@ -27,10 +27,10 @@
       {% endfor %}
       </div>
       Add to project (optional)<br>
-      {{ form.project(size=140) }}<br>
+      {{ form.project(size=80) }}<br>
       {% for error in form.project.errors %}
         <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
+      {% endfor %} <br>
       <p><input type="submit" value="Add task"></p>
       </div>
     </div>
