@@ -8,7 +8,7 @@
   {% for task in tasks %}
   <form method="post" name="completetask">
   {{ task.name }} {% if task.due_date %} (due {{ task.due_date|datetimeformat }}) {% endif %}
-  <button type="submit" name="is_finished" value="{{ task.id }}">Complete</button>
+  <button type="submit" name="is_finished" value="{{ task.id }}" class="btn-sq-xs btn-default">Complete</button>
   </form>
   {% endfor %}
 
