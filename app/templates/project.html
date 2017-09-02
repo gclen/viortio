@@ -6,10 +6,10 @@
   <title>{{ title }}</title>
   <h3>Your pending tasks</h3>
   {% for task in tasks %}
-  <form method="post" name="completetask">
-  {{ task.name }} {% if task.due_date %} (due {{ task.due_date|datetimeformat }}) {% endif %}
-  <button type="submit" name="is_finished" value="{{ task.id }}" class="btn-sq-xs btn-default">Complete</button>
-  </form>
+    <form method="post" name="completetask">
+    <button type="submit" name="is_finished" value="{{ task.id }}" class="btn-sq-xs btn-default">Mark as complete</button>
+    {{ task.name }} {% if task.due_date %} (due {{ task.due_date|datetimeformat }}) {% endif %}
+    </form>
   {% endfor %}
 
   <a href="{{ url_for('add_task') }}">Add a new task</a>

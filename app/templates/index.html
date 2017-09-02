@@ -3,26 +3,26 @@
 
 {% block content %}
   {% include 'flash.html' %}
-
-
   <div align="left">
-    <h3>Your projects</h3>
-    {% for project in projects %}
-    <a  href="{{ url_for('project', project_name=project) }}">{{ project }}</a><br>
-    {% endfor %}
-  </div>
+    <div class="inner div" style="padding:10px">
+      <h3>Your projects</h3>
+      {% for project in projects %}
+      <a  href="{{ url_for('project', project_name=project) }}">{{ project }}</a><br>
+      {% endfor %}
+    </div>
 
-  <div align="left">
-    <h3>Your pending tasks</h3>
-    {% for task in tasks %}
+    <div class="inner div" style="padding:10px">
+      <h3>Your pending tasks</h3>
+      {% for task in tasks %}
 
-    <form method="post" name="completetask">
-    <button type="submit" name="is_finished" value="{{ task.id }}" class="btn-sq-xs btn-default">Mark as complete</button>
-    {{ task.name }} {% if task.due_date %} (due {{ task.due_date|datetimeformat }}) {% endif %}
-    </form>
-    {% endfor %}
+      <form method="post" name="completetask">
+      <button type="submit" name="is_finished" value="{{ task.id }}" class="btn-sq-xs btn-default">Mark as complete</button>
+      {{ task.name }} {% if task.due_date %} (due {{ task.due_date|datetimeformat }}) {% endif %}
+      </form>
+      {% endfor %}
 
-    <a href="{{ url_for('add_task') }}">Add a new task</a>
+      <a href="{{ url_for('add_task') }}">Add a new task</a>
+    </div>
   </div>
 
 {% endblock %}

@@ -2,8 +2,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h3>Completed tasks</h3>
-  {% for task in tasks %}
-  <li>{{ task.name }}</li>
+  <div class="inner div" style="padding:10px">
+    <h3>Completed tasks</h3>
+    {% for task in tasks %}
+    <li>{{ task.name }}</li>
+  </div>
   {% endfor %}
 {% endblock %}
